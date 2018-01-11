@@ -22,8 +22,8 @@ then
 if [ -d /home/Configfiles ]
 then
     rm -rf Configfiles.zip
-	rmdir /home/Configfiles
-fi	
+    rm -rf /home/Configfiles
+fi		
 
 wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
 unzip Configfiles.zip -d /home/
