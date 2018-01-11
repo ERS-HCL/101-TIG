@@ -16,7 +16,7 @@ apt-get install ansible -y
 apt-get install unzip -y
 
 cd /home/
-wget https://raw.githubusercontent.com/devopszone/TIG/master/Configfiles.zip
+wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/blob/master/Configfiles.zip
 unzip Configfiles.zip -d /home/
 
 
