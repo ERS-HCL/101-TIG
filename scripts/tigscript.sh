@@ -17,12 +17,12 @@ apt-get install unzip -y
 
 cd /home/
 
-if [ -e Configfiles.zip ]
+if [ -e Configfiles.* ]
 then
 if [ -d /home/Configfiles ]
 then
-    rm -rf Configfiles.zip
-    rm -rf /home/Configfiles
+    rm -rf Configfiles.*
+	rm -rf /home/Configfiles
 fi		
 
 wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
