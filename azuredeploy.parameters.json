@@ -1,0 +1,24 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "sshPublicKey": {
+      "value": "GEN-SSH-PUB-KEY"
+    },
+    "TIGDnsPrefix": {
+      "value": "GEN-UNIQUE-DNS"
+    },
+	"TomcatManagerIP": {
+      "value": "GEN-UNIQUE-IP-1"
+    },
+	"JolokiaServerIP": {
+      "value": "GEN-UNIQUE-IP-2"
+    },
+	"RedisIP": {
+      "value": "GEN-UNIQUE-IP-3"
+    }
+  }
+}
