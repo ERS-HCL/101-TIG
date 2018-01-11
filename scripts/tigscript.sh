@@ -24,7 +24,7 @@ then
     rm -rf Configfiles.*
 	rm -rf /home/Configfiles
 fi		
-
+fi
 wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
 unzip Configfiles.zip -d /home/
 
