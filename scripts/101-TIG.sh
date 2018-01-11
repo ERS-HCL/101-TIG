@@ -15,8 +15,9 @@ apt-get update
 apt-get install ansible -y
 apt-get install unzip -y
 
+echo -e "starting to download confizip"
 cd /home/
-wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/blob/master/Configfiles.zip
+wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
 unzip Configfiles.zip -d /home/
 
 
