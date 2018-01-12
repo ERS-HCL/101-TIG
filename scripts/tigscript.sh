@@ -27,7 +27,7 @@ then
   fi  
 fi
 wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
-unzip Configfiles.zip -d /home/
+unzip Configfiles.zip -d /home/Configfiles/
 
 
 HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP" -vvv
