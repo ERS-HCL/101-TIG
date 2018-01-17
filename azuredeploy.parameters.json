@@ -3,22 +3,31 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
-      "value": "azureuser"
+      "value": "mynewtigadmin12"
     },
     "sshPublicKey": {
-      "value": "GEN-SSH-PUB-KEY"
+      "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeXD6Wxl2yxPQsiPzlrDfFWsK11cFWa05V0e2eN3P/FU3mjA127ZJa0to3LPcCj23UYXGdthCC4bGYxCbKFmB8JhwODOI6BaSUPvT+FFl8OOmiD2AHU2v8Lp76Wm3/G5n95nVsAldsEueNTISOo90NY7vu5BaA7eMbiCDQsIwOv3m2ulJ9adFKfymtq9Ku1sKZpXuk3hFtk9GMbwTeFQvVt32GZy02+mTKviEegzmr2mbj1JOu5dl8+Qnjc/aLXC7T6BPSdTs9+PdS9Gd9c6bAFtAzoud3x0N3puAp3BpTKF+QoxT1XQmYWtnLWfBv/ckhssfiLvqCjdM+rX6bHZPv root@localhost.localdomain"
     },
-    "TIGDnsPrefix": {
-      "value": "GEN-UNIQUE-DNS"
+    "tigDnsPrefix": {
+      "value": "newtigb5"
     },
-	"TomcatManagerIP": {
-      "value": "GEN-UNIQUE-IP-1"
+    "tomcatManagerIP": {
+      "value": "18.217.53.35"
     },
-	"JolokiaServerIP": {
-      "value": "GEN-UNIQUE-IP-2"
+	"tomcatuser": {
+      "value": "tommy"
     },
-	"RedisIP": {
-      "value": "GEN-UNIQUE-IP-3"
+	"tomcatpassword": {
+      "value": "secret"
+    },
+    "jolokiaServerIP": {
+      "value": "18.217.53.35"
+    },
+    "redisIP": {
+      "value": "18.217.53.35"
+    },
+    "mongodbIP": {
+      "value": "18.217.53.35"
     }
   }
 }
