@@ -3,10 +3,13 @@
 
 # Script parameters from arguments
 TomcatManagerIP=$1
-JolokiaServerIP=$2
-RedisIP=$3
+TomcatUser=$2
+TomcatPassword=$3
+JolokiaServerIP=$4
+RedisIP=$5
+MongoDBIP=$6
 HostIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-
+configfile=$7
 
 apt-get update
 apt-get install software-properties-common -y
@@ -26,10 +29,9 @@ then
 	echo "directory delete"
   fi  
 fi
-wget https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/Configfiles.zip
-unzip Configfiles.zip -d /home/Configfiles/
+wget $configfile
+unzip Configfiles.zip -d /home/
 
-
-HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP" -vvv
+HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP tomcatuser=$TomcatUser tomcatpwd=$TomcatPassword MongoDBIP=MongoDBIP" -vvv
 
 
