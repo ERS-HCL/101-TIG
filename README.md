@@ -41,9 +41,7 @@ ssh -i <path to private key file> -L 9000:localhost:9000 -L 8084:localhost:8084 
 ```
 > NOTE: Port 9000 and 8084 correspond to Spinnaker's deck and gate services, respectively.
 
-## E. Connect to Spinnaker
+## E. Connect to Grafana and InfluxDB
 
-1. After you have started your tunnel, navigate to http://localhost:9000/ on your local machine.
-1. Check the [Troubleshooting Guide](http://www.spinnaker.io/docs/troubleshooting-guide) if you have any issues.
-
-## Questions/Comments? azdevopspub@microsoft.com
+1. After you have started your tunnel, navigate to http://localhost:3000/ on your local machine, to view Grafana UI. Username: admin, Password: YOUR_PASSWORD
+2. After you have started your tunnel, navigate to http://localhost:8083/ on your local machine, to view InfluxDB UI. Username: root,Password : root. Give the host name as the full DNS name of your instance and save. Select the database "TIG".  
