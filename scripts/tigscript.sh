@@ -32,6 +32,6 @@ fi
 wget $configfile
 unzip Configfiles.zip -d /home/Configfiles/
 
-HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP tomcatuser=$TomcatUser tomcatpwd=$TomcatPassword MongoDBIP=MongoDBIP" -vvv
+HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP tomcatuser=$TomcatUser tomcatpwd=$TomcatPassword MongoDBIP=$MongoDBIP" -vvv
 
 
