@@ -120,7 +120,7 @@
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('tigDnsPrefix')]"
+        "domainNameLabel": "[concat(parameters('tigDnsPrefix'),uniquestring(resourceGroup().id))]"		
         }
       }
     },   
@@ -165,7 +165,7 @@
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
               },
               "subnet": {
-                "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName')),'/subnets/',variables('subnetName'))]"
+                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'),variables('subnetName'))]"
               }
             }
           }
@@ -246,7 +246,7 @@
             "typeHandlerVersion": "2.0",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "fileUris": ["[concat(variables('_artifactsLocation'),'scripts/',variables('_extensionScript'),parameters('_artifactsLocationSasToken'))]"               
+              "fileUris": ["[concat(parameters('_artifactsLocation'),'scripts/',variables('_extensionScript'),parameters('_artifactsLocationSasToken'))]"               
               ],
               "timestamp": 180120184
             },
