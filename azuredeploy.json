@@ -22,63 +22,89 @@
     },
     "tomcatManagerIP": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
         "description": "Tomcat Manager IP to monitor Tomcat."
       }
     },
 	 "tomcatuser": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
         "description": "Tomcat Manager User to connect to Tomcat."
       }
     },
 	 "tomcatpassword": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
         "description": "Tomcat Manager user password to connect to  Tomcat."
       }
     },
     "jolokiaServerIP": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
         "description": "Jolokia server IP to monitor Jolokia.Port 8080 is preconfigured"
       }
     },
     "redisIP": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
-        "description": "Provide only Redis instance IP address.Port 6379 is preconfigured "
+        "description": "Provide only Redis instance IP address.Port 6379 is preconfigured"
       }
     },
 	"mongodbIP": {
       "type": "string",
+	  "defaultValue" : "",
       "metadata": {
         "description": "Provide only MongoDB instance IP address.Port 27017 is preconfigured "
       }
-    }
+    },
+	"apachehttpdIP": {
+      "type": "string",
+	  "defaultValue" : "",
+      "metadata": {
+        "description": "Provide only Apache httpd instance IP address."
+      }
+    },
+	"_artifactsLocation": {
+          "type": "string",
+          "metadata": {
+              "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+          },
+          "defaultValue": "https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/"
+      },
+      "_artifactsLocationSasToken": {
+          "type": "securestring",
+          "metadata": {
+              "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated."
+          },
+          "defaultValue": ""
+      }
   },
   "variables": {
-    "resourcePrefix": "tig",
+   "resourcePrefix": "tig",
     "storageAccountName": "[concat(variables('resourcePrefix'), uniquestring(resourceGroup().id))]",
     "OSDiskName": "[concat(variables('resourcePrefix'), 'OSDisk')]",
     "nicName": "[concat(variables('resourcePrefix'), 'VMNic')]",
     "subnetName": "[concat(variables('resourcePrefix'), 'Subnet')]",
     "publicIPAddressName": "[concat(variables('resourcePrefix'), 'PublicIP')]",
-    "vmStorageAccountContainerName": "vhds",    
+    "vmStorageAccountContainerName": "vhds",
     "vmName": "[concat(variables('resourcePrefix'), 'VM')]",
     "vmExtensionName": "[concat(variables('resourcePrefix'), 'Init')]",
     "virtualNetworkName": "[concat(variables('resourcePrefix'), 'VNET')]",
-    "_artifactsLocation": "https://raw.githubusercontent.com/lavanyasubbarayalu/101-TIG/master/",
     "_extensionScript": "tigscript.sh",
-    "_artifactsLocationSasToken": "",
-	"_configfilelocation":"[concat(variables('_artifactsLocation'), 'scripts/Configfiles.zip')]"
+    "_configfilelocation": "[concat(parameters('_artifactsLocation'), 'scripts/Configfiles.zip',parameters('_artifactsLocationSasToken'))]"
+
 	
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
-      "apiVersion": "2016-01-01",
+      "apiVersion": "2017-10-01",
       "location": "[resourceGroup().location]",
       "sku": {
         "name": "Standard_LRS"
@@ -87,7 +113,7 @@
       "properties": {}
     },
     {
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2017-10-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
@@ -99,7 +125,7 @@
       }
     },   
     {
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2017-10-01",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",      
       "location": "[resourceGroup().location]",
@@ -148,7 +174,7 @@
     },
 
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-12-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
       "location": "[resourceGroup().location]",
@@ -209,7 +235,7 @@
         {
           "type": "extensions",
           "name": "[variables('vmExtensionName')]",
-          "apiVersion": "2015-06-15",
+          "apiVersion": "2017-12-01",
           "location": "[resourceGroup().location]",
           "dependsOn": [
             "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
@@ -220,12 +246,12 @@
             "typeHandlerVersion": "2.0",
             "autoUpgradeMinorVersion": true,
             "settings": {
-              "fileUris": ["[concat(variables('_artifactsLocation'),'scripts/',variables('_extensionScript'))]"               
+              "fileUris": ["[concat(variables('_artifactsLocation'),'scripts/',variables('_extensionScript'),parameters('_artifactsLocationSasToken'))]"               
               ],
-              "timestamp": 17012018
+              "timestamp": 180120184
             },
             "protectedSettings": {
-              "commandToExecute": "[concat('sh tigscript.sh',' ',parameters('tomcatManagerIP'),' ',parameters('tomcatuser'),' ',parameters('tomcatpassword'),' ',parameters('jolokiaServerIP'),' ',parameters('redisIP'),' ',parameters('mongodbIP'),' ',variables('_configfilelocation'))]"
+              "commandToExecute": "[concat('sh tigscript.sh',' ',parameters('tomcatManagerIP'),' ',parameters('tomcatuser'),' ',parameters('tomcatpassword'),' ',parameters('jolokiaServerIP'),' ',parameters('redisIP'),' ',parameters('mongodbIP'),' ',parameters('apachehttpdIP'),' ',variables('_configfilelocation'))]"
             }
 
           }
