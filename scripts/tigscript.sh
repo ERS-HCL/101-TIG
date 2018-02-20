@@ -8,8 +8,9 @@ TomcatPassword=$3
 JolokiaServerIP=$4
 RedisIP=$5
 MongoDBIP=$6
+ApacheHttpdIP=$7
 HostIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-configfile=$7
+configfile=$8
 
 apt-get update
 apt-get install software-properties-common -y
@@ -32,6 +33,6 @@ fi
 wget $configfile
 unzip Configfiles.zip -d /home/Configfiles/
 
-HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP tomcatuser=$TomcatUser tomcatpwd=$TomcatPassword MongoDBIP=$MongoDBIP" -vvv
+HOME=/root ansible-playbook /home/Configfiles/ansible/docker_install.yml  --extra-vars "HostIP=$HostIP JolokiaServerIP=$JolokiaServerIP RedisIP=$RedisIP TomcatManagerIP=$TomcatManagerIP tomcatuser=$TomcatUser tomcatpwd=$TomcatPassword MongoDBIP=$MongoDBIP ApacheHttpdIP=$ApacheHttpdIP" -vvv
 
 
