@@ -1,6 +1,11 @@
-
-
-This template allows you to deploy an instance of Telegraf-InfluxDB-Grafana on a Linux Ubuntu 14.04 LTS VM. This will deploy a VM in the resource group location and return the FQDN of the VM. This will install the components of Telegraf, InfluxDB and Grafana. The template provides configuration for telegraf with plugins pre-enabled for Docker,container host metrics, jolokia withh jvm, tomcat, redis. You will have to provide the application specific(Java, tomcat, redis) host / IP details to target a deployment environment.
+# Telegraf-influxDB-Grafana in Azure 
+<a href="" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+<a " target="_blank">
+    <img src="http://armviz.io/visualizebutton.png"/>
+</a>
+This template allows you to deploy an instance of Telegraf-InfluxDB-Grafana on a Linux Ubuntu 14.04 LTS VM. This will deploy a VM in the resource group location and return the FQDN of the VM and installs the components of Telegraf, InfluxDB and Grafana. The template provides configuration for telegraf with plugins enabled for Docker,container host metrics, jvm, redis, tomcat, mongodb, apache httpd and a preconfigured java stack dashboard
 
 ## A. Deploy TIG VM
 1. Click the "Deploy to Azure" button. If you don't have an Azure subscription, you can follow instructions to signup for a free trial.
@@ -11,35 +16,30 @@ Once the VM has been deployed, note down the DNS Name generated in the Azure por
 - If you are using Windows, use Putty or any bash shell on Windows to login to the VM with the username and password you supplied.
 - If you are using Linux or Mac, use Terminal to login to the VM with the username and password you supplied.
 
-## C. Configure Spinnaker
-In Azure, Spinnaker can target a Kubernetes cluster or VM Scale Sets.
-- To target a Kubernetes cluster, follow instructions [here](https://aka.ms/azspinkubecreate) to deploy a Kubernetes cluster and [here](https://www.spinnaker.io/setup/providers/kubernetes/) to configure Spinnaker.
-- To target VM Scale Sets, follow instructions [here](https://www.spinnaker.io/setup/providers/azure/) to configure Spinnaker.
-
-## D. Setup SSH port forwarding
-Once you have configured Spinnaker, you need to setup port forwarding to view the Spinnaker UI on your local machine. If you do not know the full DNS name of your instance, go to the Portal and find it in the deployment outputs here: `Resource Groups > {Resource Group Name} > Deployments > {Deployment Name, usually 'Microsoft.Template'} > Outputs`
+## C. Setup SSH port forwarding
+Once you have deployed the TIG ARM template, you need to setup port forwarding to view the Grafana UI and InfluxDB UI on your local machine. If you do not know the full DNS name of your instance, go to the Portal and find it in the deployment outputs here: `Resource Groups > {Resource Group Name} > Deployments > {Deployment Name, usually 'Microsoft.Template'} > Outputs`
 
 ### If you are using Windows:
 Install Putty or use any bash shell for Windows (if using a bash shell, follow the instructions for Linux or Mac).
 
 Run this command:
 ```
-putty.exe -ssh -i <path to private key file> -L 9000:localhost:9000 -L 8084:localhost:8084 <User name>@<Public DNS name of instance you just created>
+putty.exe -ssh -i <path to private key file> -L 3000:localhost:3000 -L 8083:localhost:8083 <User name>@<Public DNS name of instance you just created>
 ```
 
 Or follow these manual steps:
 1. Launch Putty and navigate to Change Settings > SSH > Tunnels
-1. In the Options controlling SSH port forwarding window, enter 8084 for Source port. Then enter 127.0.0.1:8084 for the Destination. Click Add.
-1. Repeat this process for port 9000
+1. In the Options controlling SSH port forwarding window, enter 8083 for Source port. Then enter 127.0.0.1:8083 for the Destination. Click Add.
+1. Repeat this process for port 3000
 1. Navigate to 'Connection > SSH > Auth' and enter your private key file for authentication. For more information on using ssh keys with Putty, see [here](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-ssh-from-windows#create-a-private-key-for-putty).
 1. Click Open to establish the connection.
 
 ### If you are using Linux or Mac:
 Run this command:
 ```bash
-ssh -i <path to private key file> -L 9000:localhost:9000 -L 8084:localhost:8084 <User name>@<Public DNS name of instance you just created>
+ssh -i <path to private key file> -L 3000:localhost:3000 -L 8083:localhost:8083 <User name>@<Public DNS name of instance you just created>
 ```
-> NOTE: Port 9000 and 8084 correspond to Spinnaker's deck and gate services, respectively.
+> NOTE: Port 3000 and 8083 correspond to Grafana and InfluxDB UI interfaces, respectively.
 
 ## E. Connect to Grafana and InfluxDB
 
